@@ -1,0 +1,36 @@
+# Dataset — não commitar (Edital item 7.11)
+data/
+*.parquet
+*.xlsx
+*.csv
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+dist/
+build/
+.env
+venv/
+.venv/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Modelo serializado — commitar apenas versão final
+model.pkl
+*.pkl
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Claude Code local settings — contains secrets (MCP tokens) / session state
+.claude/settings.local.json
+.claude/scheduled_tasks.lock
