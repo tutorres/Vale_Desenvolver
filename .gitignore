@@ -31,6 +31,6 @@ Thumbs.db
 .vscode/
 .idea/
 
-# Claude Code local settings — contains secrets (MCP tokens) / session state
-.claude/settings.local.json
-.claude/scheduled_tasks.lock
+# Local tooling / editor config
+.claude/
+vale_coding_context.yaml

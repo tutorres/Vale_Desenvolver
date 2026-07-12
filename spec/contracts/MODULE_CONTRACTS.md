@@ -1,7 +1,7 @@
 # Contracts — Entrada e Saída por Módulo
 
 Cada módulo tem um contrato explícito: o que recebe, o que garante, o que retorna.
-O agente de coding deve respeitar esses contratos ao implementar e ao escrever testes.
+A implementação e os testes devem respeitar esses contratos.
 
 ---
 

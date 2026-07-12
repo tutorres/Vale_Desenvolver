@@ -149,8 +149,6 @@ jupyter==1.x
 
 ```
 vale_project/
-├── .claude/
-│   └── skills/              # instruções para o agente de coding
 ├── spec/
 │   ├── PROJECT_SPEC.md      # este arquivo
 │   ├── contracts/           # contratos de entrada/saída por módulo
@@ -177,7 +175,6 @@ vale_project/
 │   ├── 04_model.ipynb
 │   └── 05_report.ipynb
 ├── data/                    # NÃO commitar — apenas local
-├── vale_coding_context.yaml
 ├── requirements.txt
 ├── README.md
 └── .gitignore
