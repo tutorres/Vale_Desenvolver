@@ -4,6 +4,10 @@ data/
 *.xlsx
 *.csv
 
+# Material do desafio recebido — não redistribuir
+Estudo Guiado*.pdf
+*NOTAS DE REVIS*.pdf
+
 # Python
 __pycache__/
 *.py[cod]

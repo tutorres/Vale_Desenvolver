@@ -1,0 +1,51 @@
+{
+  "model": "XGBoost",
+  "label": "label_4h",
+  "threshold": 0.7,
+  "n_test": 13890534,
+  "n_positives": 227623,
+  "confusion_matrix": {
+    "tp": 130705,
+    "fp": 907848,
+    "fn": 96918,
+    "tn": 12755063
+  },
+  "recall": 0.5742170167338099,
+  "precision": 0.1258529896885378,
+  "operational_meaning": {
+    "false_negative": "Don't Go nao antecipado = parada nao planejada",
+    "false_positive": "alerta sem Don't Go = inspecao desnecessaria"
+  },
+  "false_negative_distribution": {
+    "total_fn": 96918,
+    "by_tipo_caminhao": {
+      "caminhao": 1986,
+      "escavadeira": 94932
+    },
+    "by_current_state": {
+      "Operando": 92773,
+      "Parado": 3916,
+      "Manutenção": 229
+    },
+    "by_alarm_count_4h_bin": {
+      "0-5": 10,
+      "6-10": 17,
+      "11-20": 22,
+      "21+": 96869
+    }
+  },
+  "recall_by_month": {
+    "2025-05": {
+      "recall": 0.42332741267021906,
+      "tp": 67210,
+      "fn": 91556,
+      "positives": 158766
+    },
+    "2025-06": {
+      "recall": 0.9221284691462015,
+      "tp": 63495,
+      "fn": 5362,
+      "positives": 68857
+    }
+  }
+}
