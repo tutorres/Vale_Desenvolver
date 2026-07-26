@@ -1,5 +1,5 @@
 """
-error_analysis.py — Matriz de confusao e analise de erros do XGBoost (CM 5.2).
+error_analysis.py: Matriz de confusao e analise de erros do XGBoost (CM 5.2).
 
 Usa o modelo ja treinado (model.pkl) e o conjunto de TESTE (timestamp >= 2025-05-01)
 de data/features.parquet. NAO retreina nada.
@@ -171,8 +171,8 @@ def plot_confusion_matrix(cm: Dict[str, int], threshold: float, out_path: str) -
     ax.set_xlabel("Predicao do modelo")
     ax.set_ylabel("Situacao real")
     ax.set_title(
-        f"Matriz de Confusao — XGBoost, label_4h, threshold {threshold:g}\n"
-        f"(conjunto de teste, maio–junho 2025)"
+        f"Matriz de Confusao: XGBoost, label_4h, threshold {threshold:g}\n"
+        f"(conjunto de teste, maio-junho 2025)"
     )
 
     vmax = grid.max()

@@ -1,5 +1,5 @@
 """
-TDD — test_business_rules.py
+TDD: test_business_rules.py
 Testes para src/business_rules.py
 """
 
@@ -17,7 +17,7 @@ def rules():
 
 @pytest.fixture
 def df_below_threshold():
-    """2 alarmes em 30min — abaixo do threshold de 3."""
+    """2 alarmes em 30min, abaixo do threshold de 3."""
     base = datetime(2025, 1, 1, 8, 0)
     return pd.DataFrame({
         "TAG": ["CAM001", "CAM001"],
@@ -29,7 +29,7 @@ def df_below_threshold():
 
 @pytest.fixture
 def df_above_threshold():
-    """3 alarmes em 30min — atinge o threshold exato."""
+    """3 alarmes em 30min, atinge o threshold exato."""
     base = datetime(2025, 1, 1, 8, 0)
     return pd.DataFrame({
         "TAG": ["CAM001", "CAM001", "CAM001"],

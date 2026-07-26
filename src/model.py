@@ -19,7 +19,7 @@ FEATURE_COLS = [
     "tipo_caminhao",
 ]
 
-# Train = Jan–Apr, Test = May–Jun
+# Train = Jan-Apr, Test = May-Jun
 _TRAIN_END = pd.Timestamp("2025-04-30 23:59:59")
 _TEST_START = pd.Timestamp("2025-05-01 00:00:00")
 
@@ -37,7 +37,7 @@ def train_model(
     Test:  timestamps from May onwards.
 
     Handles class imbalance via scale_pos_weight. Reports F1, precision,
-    recall and AUC — never accuracy as the primary metric.
+    recall and AUC, never accuracy as the primary metric.
 
     Args:
         features: Feature DataFrame from build_features().
@@ -91,7 +91,7 @@ def train_model(
     }
 
     logger.info(
-        "Model trained — F1=%.3f precision=%.3f recall=%.3f AUC=%.3f",
+        "Model trained: F1=%.3f precision=%.3f recall=%.3f AUC=%.3f",
         metrics["f1"], metrics["precision"], metrics["recall"], metrics["auc"],
     )
     return model, metrics
@@ -109,7 +109,7 @@ def evaluate_model(
 
     Returns:
         List of dicts, one per threshold, each containing f1, precision,
-        recall, and threshold — never accuracy alone.
+        recall, and threshold, never accuracy alone.
     """
     y_prob = model.predict_proba(X_test)[:, 1]
     results = []

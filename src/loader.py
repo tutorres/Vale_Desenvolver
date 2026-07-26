@@ -13,7 +13,7 @@ REQUIRED_COLUMNS = {
     "Valor", "Classe", "Is_Dont_Go", "Tipo", "Data_Evento",
 }
 
-# Low-cardinality string columns — cast to category to keep the 37M-row
+# Low-cardinality string columns: cast to category to keep the 37M-row
 # real dataset within memory (object dtype alone needs ~30GB; see
 # spec/DECISIONS.md).
 CATEGORICAL_COLUMNS = [
@@ -60,10 +60,10 @@ def load_telemetry(data_dir: str) -> pd.DataFrame:
 
         df["_source_month"] = month
         frames.append(df)
-        logger.info("Loaded %s — %d rows", path.name, len(df))
+        logger.info("Loaded %s: %d rows", path.name, len(df))
 
     # pd.concat reverts a categorical column to object if the per-frame
-    # category sets differ (they do across months for real data — e.g.
+    # category sets differ (they do across months for real data, e.g.
     # different alarms or operators appear in different months). Unify
     # each column onto one shared CategoricalDtype first so concat keeps
     # it categorical instead of materializing a giant object column.

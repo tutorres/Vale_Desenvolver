@@ -68,7 +68,7 @@ def apply_sliding_window(df: pd.DataFrame, rules: Dict[str, dict]) -> pd.DataFra
 
     df["Is_Dont_Go_derived"] = derived
     logger.info(
-        "Sliding window applied — Don't Go events derived: %d", int(derived.sum())
+        "Sliding window applied. Don't Go events derived: %d", int(derived.sum())
     )
     return df
 

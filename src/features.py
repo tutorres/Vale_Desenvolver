@@ -53,15 +53,15 @@ def build_features(df_tele: pd.DataFrame, df_apon: pd.DataFrame) -> pd.DataFrame
     Returns:
         Feature DataFrame with columns defined in MODULE_CONTRACTS.md.
     """
-    # Only these 5 columns are read below — selecting them before the
+    # Only these 5 columns are read below. Selecting them before the
     # copy/sort avoids dragging the other ~14 columns (several large
     # categoricals) through a 37M-row sort/groupby.
     needed_cols = ["TAG", "timestamp", "Tipo", "Id_Criticidade", "Is_Dont_Go"]
     df = df_tele[needed_cols].copy().sort_values(["TAG", "timestamp"]).reset_index(drop=True)
     apon_tag_col = "Tag" if "Tag" in df_apon.columns else "TAG"
 
-    # current_state has a handful of possible values ("Operando", "Parado", ...)
-    # — fixing the categories up front keeps it category dtype across all TAGs
+    # current_state has a handful of possible values ("Operando", "Parado", ...).
+    # Fixing the categories up front keeps it category dtype across all TAGs
     # (pd.concat reverts to object if per-frame categories differ, as discovered
     # with TAG/Alarme in loader.py).
     state_categories = pd.CategoricalDtype(

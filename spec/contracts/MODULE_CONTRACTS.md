@@ -1,4 +1,4 @@
-# Contracts — Entrada e Saída por Módulo
+# Contracts: Entrada e Saída por Módulo
 
 Cada módulo tem um contrato explícito: o que recebe, o que garante, o que retorna.
 A implementação e os testes devem respeitar esses contratos.
@@ -19,7 +19,7 @@ A implementação e os testes devem respeitar esses contratos.
 **Output:**
 - DataFrame concatenado com todos os registros
 - Coluna `_source_month` adicionada (jan, feb, mar, abr, may, jun)
-- Schema validado — levanta `SchemaError` se coluna ausente
+- Schema validado, levanta `SchemaError` se coluna ausente
 
 **Postconditions:**
 - `len(df) == 37_164_054` (± tolerância por versão do dataset)
@@ -159,8 +159,8 @@ class QualityReport:
 - `label_col`: coluna alvo (`label_1h`, `label_2h` ou `label_4h`)
 
 **Split:**
-- Train: Jan–Abr (baseado em `timestamp`)
-- Test: Mai–Jun
+- Train: Jan-Abr (baseado em `timestamp`)
+- Test: Mai-Jun
 
 **Output:**
 - `model`: XGBClassifier treinado

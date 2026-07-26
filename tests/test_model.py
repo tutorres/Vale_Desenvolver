@@ -1,5 +1,5 @@
 """
-TDD — test_model.py
+TDD: test_model.py
 Testes para src/model.py
 """
 
@@ -55,12 +55,12 @@ class TestTrainModel:
             assert "f1" in metrics
 
     def test_split_temporal_respeitado(self, features_df):
-        """Treino usa Jan-Abr, teste usa Mai-Jun — sem dados futuros no treino."""
+        """Treino usa Jan-Abr, teste usa Mai-Jun, sem dados futuros no treino."""
         model, metrics = train_model(features_df, label_col="label_1h")
         assert model is not None
 
     def test_modelo_melhor_que_random(self, features_df):
-        """F1 deve ser positivo — modelo melhor que classificador aleatório."""
+        """F1 deve ser positivo. O modelo é melhor que classificador aleatório."""
         _, metrics = train_model(features_df, label_col="label_1h")
         assert metrics["f1"] >= 0
 

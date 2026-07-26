@@ -1,5 +1,5 @@
 """
-TDD — test_cleaner.py
+TDD: test_cleaner.py
 Testes para src/cleaner.py
 
 Convenção:
@@ -28,10 +28,10 @@ def df_raw():
         "Criticidade": [
             "N??o Crítico",       # encoding bug variante 1
             "Não Cr??tico",       # encoding bug variante 2
-            "Crítico",            # correto — não deve ser alterado
-            "Não Crítico",        # correto — não deve ser alterado
+            "Crítico",            # correto, não deve ser alterado
+            "Não Crítico",        # correto, não deve ser alterado
             "N??o Crítico",       # encoding bug variante 1
-            "Crítico",            # correto — não deve ser alterado
+            "Crítico",            # correto, não deve ser alterado
         ],
         "Valor": ["43,7999", "100,0", "0,5", "12,3456", "99,99", "NULL"],
         "Classe": ["Activate", "NULL", "NULL", "Inactive", "NULL", "Activate"],
@@ -42,7 +42,7 @@ def df_raw():
 
 @pytest.fixture
 def df_clean(df_raw):
-    """DataFrame limpo — retornado pela função clean_telemetry."""
+    """DataFrame limpo, retornado pela função clean_telemetry."""
     df, _ = clean_telemetry(df_raw)
     return df
 

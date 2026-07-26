@@ -7,10 +7,10 @@ mesmo split temporal e com as mesmas FEATURE_COLS do XGBoost de referência
 comparativa) do Estudo Guiado.
 
 Baselines implementados:
-  * DummyClassifier(strategy="most_frequent") — prevê sempre a classe majoritária.
-  * DummyClassifier(strategy="stratified")     — prevê aleatoriamente respeitando
+  * DummyClassifier(strategy="most_frequent"): prevê sempre a classe majoritária.
+  * DummyClassifier(strategy="stratified"): prevê aleatoriamente respeitando
     a proporção de classes do treino (seed 42).
-  * Heurístico de domínio — REGRA: prevê Don't Go (positivo) quando houve ao menos
+  * Heurístico de domínio. REGRA: prevê Don't Go (positivo) quando houve ao menos
     um alarme crítico na última hora, isto é `critical_alarm_count_1h > 0`. É a
     regra "de bolso" que um dispatcher aplicaria sem modelo. O score contínuo
     usado para AUC-ROC/AUC-PR é o próprio `critical_alarm_count_1h`.
@@ -128,6 +128,6 @@ def run_baselines(features: pd.DataFrame, label_col: str = "label_4h",
         "heuristic_critical_1h": evaluate_heuristic(X_test, y_test),
     }
     for name, m in results.items():
-        logger.info("Baseline %s — F1=%.3f recall=%.3f AUC-PR=%.3f",
+        logger.info("Baseline %s: F1=%.3f recall=%.3f AUC-PR=%.3f",
                     name, m["f1"], m["recall"], m["auc_pr"])
     return results

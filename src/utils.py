@@ -9,7 +9,7 @@ def set_seeds(seed: int = 42) -> None:
     random.seed(seed)
     np.random.seed(seed)
     try:
-        import xgboost  # noqa: F401 — seed is passed per-model, not globally
+        import xgboost  # noqa: F401 - seed is passed per-model, not globally
     except ImportError:
         pass
 

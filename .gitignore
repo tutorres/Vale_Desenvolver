@@ -1,10 +1,10 @@
-# Dataset — não commitar (Edital item 7.11)
+# Dataset: não commitar (Edital item 7.11)
 data/
 *.parquet
 *.xlsx
 *.csv
 
-# Material do desafio recebido — não redistribuir
+# Material do desafio recebido: não redistribuir
 Estudo Guiado*.pdf
 *NOTAS DE REVIS*.pdf
 
@@ -23,7 +23,7 @@ venv/
 .ipynb_checkpoints/
 *.ipynb_checkpoints
 
-# Modelo serializado — commitar apenas versão final
+# Modelo serializado: commitar apenas versão final
 model.pkl
 *.pkl
 

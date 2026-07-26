@@ -1,5 +1,5 @@
 """
-TDD — test_features.py
+TDD: test_features.py
 Testes para src/features.py
 """
 
@@ -62,7 +62,7 @@ class TestBuildFeatures:
             assert col in result.columns, f"Coluna ausente: {col}"
 
     def test_sem_nan_em_features_numericas(self, df_tele, df_apon):
-        """Features numéricas não podem ter NaN — modelo não aceita."""
+        """Features numéricas não podem ter NaN. O modelo não aceita."""
         result = build_features(df_tele, df_apon)
         numeric_cols = [c for c in result.columns if result[c].dtype in [np.float64, np.int64]]
         assert result[numeric_cols].isna().sum().sum() == 0
@@ -92,7 +92,7 @@ class TestBuildFeatures:
         assert cam["alarm_count_1h"].iloc[-1] >= cam["alarm_count_1h"].iloc[0]
 
     def test_current_state_e_category(self, df_tele, df_apon):
-        """current_state deve ser category — com 37M registros reais, um dtype
+        """current_state deve ser category. Com 37M registros reais, um dtype
         object (string Python por linha) explode a memória (ver spec/DECISIONS.md).
         Tags com estados diferentes não podem fazer o concat reverter para object."""
         result = build_features(df_tele, df_apon)

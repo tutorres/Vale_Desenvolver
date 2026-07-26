@@ -1,5 +1,5 @@
 """
-TDD — test_baselines.py
+TDD: test_baselines.py
 Testes para src/baselines.py (baselines de referência CM 4.2).
 """
 

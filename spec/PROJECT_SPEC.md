@@ -1,4 +1,4 @@
-# Vale Programa Desenvolver 2026 — Project Specification (SDD)
+# Vale Programa Desenvolver 2026: Project Specification (SDD)
 
 ## 1. Objetivo
 
@@ -19,8 +19,8 @@ telemetria real de uma mina de minério de ferro.
 |---|---|---|
 | `telemetry_jan..jun.parquet` | 37.164.054 | Alarmes de telemetria por equipamento |
 | `desenvolver_apontamentos.parquet` | 377.907 | Estado operacional por equipamento |
-| `Alarmes_Regra_de_Negocio.xlsx` | — | Regras de janela deslizante por alarme |
-| `desenvolver_dontgo.xlsx` | — | Sequência de eventos que gera Don't Go |
+| `Alarmes_Regra_de_Negocio.xlsx` | - | Regras de janela deslizante por alarme |
+| `desenvolver_dontgo.xlsx` | - | Sequência de eventos que gera Don't Go |
 
 ### Saídas esperadas
 | Artefato | Descrição |
@@ -37,12 +37,12 @@ telemetria real de uma mina de minério de ferro.
 
 ## 3. Módulos do Sistema
 
-### 3.1 `src/loader.py` — Carregamento
+### 3.1 `src/loader.py`: Carregamento
 - Carregar e concatenar os 6 arquivos parquet
 - Validar schema esperado (colunas, tipos)
 - Retornar DataFrame limpo de estrutura
 
-### 3.2 `src/cleaner.py` — Limpeza
+### 3.2 `src/cleaner.py`: Limpeza
 - Corrigir encoding de `Criticidade`
 - Substituir string `"NULL"` por `np.nan` em `Classe`
 - Corrigir separador decimal em `Valor`
@@ -50,18 +50,18 @@ telemetria real de uma mina de minério de ferro.
 - Detectar TAGs inconsistentes entre datasets
 - Retornar DataFrame limpo + `QualityReport`
 
-### 3.3 `src/validator.py` — Validação de qualidade
+### 3.3 `src/validator.py`: Validação de qualidade
 - Gerar relatório estruturado de cada erro encontrado
 - Contar registros afetados por cada problema
 - Retornar `QualityReport` (dataclass)
 
-### 3.4 `src/business_rules.py` — Regras de negócio
+### 3.4 `src/business_rules.py`: Regras de negócio
 - Ler regras por tipo de alarme (qty, time_window_minutes)
 - Aplicar janela deslizante por TAG por Alarme
 - Comparar sinal derivado vs `Is_Dont_Go` registrado
 - Retornar falsos positivos e falsos negativos
 
-### 3.5 `src/features.py` — Feature engineering
+### 3.5 `src/features.py`: Feature engineering
 - Rolling alarm counts (15min, 30min, 1h, 2h, 4h)
 - Distribuição por tipo de alarme por turno
 - Tempo desde último alarme crítico por TAG
@@ -69,14 +69,14 @@ telemetria real de uma mina de minério de ferro.
 - One-hot de `Tipo` (Caminhao / Escavadeira)
 - Label: `Is_Dont_Go` nos próximos [1h, 2h, 4h]
 
-### 3.6 `src/model.py` — Modelo preditivo
+### 3.6 `src/model.py`: Modelo preditivo
 - Split temporal (train Jan-Abr / test Mai-Jun)
 - Treinamento XGBoost com `scale_pos_weight`
 - Avaliação: F1, precision, recall, AUC
 - SHAP values e plots
 - Serialização do modelo
 
-### 3.7 `src/utils.py` — Utilitários
+### 3.7 `src/utils.py`: Utilitários
 - Logging padronizado
 - Seeds de reprodutibilidade
 - Funções de plot reutilizáveis
@@ -108,7 +108,7 @@ dentro de uma **janela de Z minutos**, conforme definido em `Alarmes_Regra_de_Ne
 | Restrição | Detalhe |
 |---|---|
 | Sem data leakage | Split sempre por tempo, nunca random |
-| Métrica principal | F1 + precision + recall — accuracy é enganosa (0.05% positivo) |
+| Métrica principal | F1 + precision + recall. Accuracy é enganosa (0.05% positivo) |
 | Dados externos | Proibidos (Edital item 4.1) |
 | Dataset no git | Proibido (Edital item 7.11) |
 | Reprodutibilidade | Seeds fixos, requirements.txt pinado |
@@ -174,7 +174,7 @@ vale_project/
 │   ├── 03_features.ipynb
 │   ├── 04_model.ipynb
 │   └── 05_report.ipynb
-├── data/                    # NÃO commitar — apenas local
+├── data/                    # NÃO commitar, apenas local
 ├── requirements.txt
 ├── README.md
 └── .gitignore

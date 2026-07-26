@@ -72,7 +72,7 @@ def train_lgbm(features: pd.DataFrame, label_col: str,
         "test_rows": int(len(y_test)),
     }
     logger.info(
-        "LightGBM %s — F1=%.3f precision=%.3f recall=%.3f AUC-ROC=%.3f AUC-PR=%.3f",
+        "LightGBM %s: F1=%.3f precision=%.3f recall=%.3f AUC-ROC=%.3f AUC-PR=%.3f",
         label_col, metrics["f1"], metrics["precision"], metrics["recall"],
         metrics["auc_roc"], metrics["auc_pr"],
     )

@@ -1,5 +1,5 @@
 """
-TDD — test_loader.py
+TDD: test_loader.py
 Testes para src/loader.py
 """
 
@@ -84,7 +84,7 @@ class TestLoadTelemetry:
     def test_categorias_diferentes_entre_meses_mantem_category(self, tmp_path):
         """Quando os meses têm valores diferentes (ex: TAGs distintos por mês,
         como no dataset real), o dtype category não deve reverter para object
-        após o concat — senão a memória explode nos 37M registros reais."""
+        após o concat, senão a memória explode nos 37M registros reais."""
         for i, month in enumerate(["jan", "feb", "mar", "abr", "may", "jun"]):
             df = pd.DataFrame({col: [f"{col}_{month}_{i}"] for col in _FILE_COLUMNS})
             df.to_parquet(tmp_path / f"telemetry_{month}.parquet")

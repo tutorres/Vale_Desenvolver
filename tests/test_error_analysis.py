@@ -1,5 +1,5 @@
 """
-TDD — test_error_analysis.py
+TDD: test_error_analysis.py
 Testes para src/error_analysis.py (matriz de confusao + analise de erros).
 
 Usam dados sinteticos: nao dependem de model.pkl nem de data/features.parquet.

@@ -112,9 +112,10 @@ Split temporal: treino em Jan a Abr (23.273.520 linhas), teste em Mai a Jun
 (prever sempre "não" acerta 98,4% das vezes e não previne uma única parada).
 O que importa é o ganho sobre a alternativa que a operação teria de fato.
 
-### Comparação com baselines (label_4h, teste Mai a Jun)
+### Comparação com baselines (label_4h, teste Mai a Jun, threshold 0.5)
 
-Fonte: `analysis/model_comparison.json`.
+Fonte: `analysis/model_comparison.json`. Todos os modelos foram avaliados no mesmo
+ponto de operação, **threshold 0.5**, para que a comparação seja justa.
 
 | Modelo | Precision | Recall | F1 | AUC-ROC | AUC-PR |
 |---|---|---|---|---|---|
@@ -133,7 +134,7 @@ Os dois números que sustentam o resultado:
   classificador aleatório entregaria. AUC-PR é a métrica correta aqui porque,
   ao contrário da AUC-ROC, ela não é inflada pela massa de negativos.
 
-Traduzindo para operação: no horizonte de 4h o modelo captura **57,7% dos eventos
+Traduzindo para operação, ainda no threshold 0.5: no horizonte de 4h o modelo captura **57,7% dos eventos
 Don't Go**, contra 21,0% da heurística, e faz isso com precisão 5.3x maior
 (0.111 contra 0.021), ou seja, com muito menos alarme falso por acerto.
 
@@ -143,7 +144,9 @@ custo de uma inspeção antecipada for bem menor que o de uma parada não planej
 o que é o caso típico em mineração, mas é uma premissa que precisa ser validada
 com o custo real da operação antes de qualquer implantação.
 
-### Métricas por horizonte (XGBoost)
+### Métricas por horizonte (XGBoost, threshold 0.5)
+
+Fonte: `metrics.json`.
 
 | Horizonte | F1 | Precision | Recall | AUC-ROC |
 |---|---|---|---|---|
@@ -154,7 +157,8 @@ com o custo real da operação antes de qualquer implantação.
 O trade-off é claro: horizontes curtos têm recall e AUC-ROC maiores, mas
 precisão muito menor. 4h maximiza F1 e dá mais tempo de reação à operação.
 
-Avaliação por threshold (label_4h):
+Avaliação por threshold (label_4h). As duas tabelas acima são a linha de
+threshold 0.5; a seção de análise de erros usa a linha de threshold 0.7:
 
 | Threshold | F1 | Precision | Recall |
 |---|---|---|---|
@@ -171,20 +175,24 @@ SHAP plots em `shap_plots/`. Métricas completas em `metrics.json` e
 
 ---
 
-## Análise de erros
+## Análise de erros (threshold 0.7)
 
 Fonte: `analysis/error_analysis.json` (XGBoost, label_4h, threshold 0.7).
 
-### Matriz de confusão
+Atenção ao ponto de operação: **todos os números desta seção são do threshold 0.7**,
+não do 0.5 usado nas tabelas de comparação e de horizontes acima. É por isso que o
+recall aqui é 0.574 e a precision 0.126, em vez de 0.577 e 0.111.
 
-Sobre os 13.890.534 registros de teste:
+### Matriz de confusão (threshold 0.7)
+
+Sobre os 13.890.534 registros de teste, no threshold 0.7:
 
 | | Previsto: sem Don't Go | Previsto: Don't Go |
 |---|---|---|
 | **Real: sem Don't Go** | TN 12.755.063 | FP 907.848 |
 | **Real: Don't Go** | FN 96.918 | TP 130.705 |
 
-Recall 0.574, precision 0.126.
+Recall 0.574, precision 0.126, no threshold 0.7.
 
 Significado operacional dos dois erros, e eles não custam a mesma coisa:
 
@@ -193,7 +201,7 @@ Significado operacional dos dois erros, e eles não custam a mesma coisa:
 
 ### Limitação 1: drift temporal
 
-O desempenho não é estável ao longo do período de teste.
+O desempenho não é estável ao longo do período de teste (threshold 0.7).
 
 | Mês | Positivos | TP | FN | Recall |
 |---|---|---|---|---|
@@ -210,7 +218,7 @@ split fixo.
 
 ### Limitação 2: viés por tipo de equipamento
 
-Distribuição dos 96.918 falsos negativos por tipo:
+Distribuição dos 96.918 falsos negativos do threshold 0.7 por tipo:
 
 | Tipo de equipamento | Falsos negativos | % do total |
 |---|---|---|
@@ -233,7 +241,7 @@ Por estado do equipamento no momento do falso negativo:
 
 ### Limitação 3: os falsos negativos estão todos no regime de alto volume de alarmes
 
-Distribuição dos falsos negativos por faixa de contagem de alarmes em 4h:
+Distribuição dos falsos negativos do threshold 0.7 por faixa de contagem de alarmes em 4h:
 
 | Alarmes em 4h | Falsos negativos |
 |---|---|

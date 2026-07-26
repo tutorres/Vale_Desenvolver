@@ -1,5 +1,5 @@
 """
-TDD — test_validator.py
+TDD: test_validator.py
 Testes para src/validator.py
 """
 

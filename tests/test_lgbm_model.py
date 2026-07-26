@@ -1,6 +1,6 @@
 """
-TDD — test_lgbm_model.py
-Testes para src/lgbm_model.py (segunda abordagem, LightGBM — CM 4.3).
+TDD: test_lgbm_model.py
+Testes para src/lgbm_model.py (segunda abordagem, LightGBM, CM 4.3).
 """
 
 import numpy as np

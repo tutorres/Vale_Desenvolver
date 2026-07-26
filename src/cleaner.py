@@ -29,7 +29,7 @@ def clean_telemetry(df: pd.DataFrame) -> Tuple[pd.DataFrame, QualityReport]:
     """
     df = df.copy()
 
-    # 1 — Criticidade encoding
+    # 1. Criticidade encoding
     original_crit = df["Criticidade"].copy()
     df["Criticidade"] = df["Criticidade"].str.replace(
         _CRITICIDADE_PATTERN, _CRITICIDADE_CORRECT, regex=True
@@ -37,19 +37,19 @@ def clean_telemetry(df: pd.DataFrame) -> Tuple[pd.DataFrame, QualityReport]:
     criticidade_fixed = int((df["Criticidade"] != original_crit).sum())
     logger.info("Criticidade encoding fixed: %d records", criticidade_fixed)
 
-    # 2 — NULL string → np.nan in Classe
+    # 2. NULL string → np.nan in Classe
     mask_null = df["Classe"] == "NULL"
     null_string_fixed = int(mask_null.sum())
     df.loc[mask_null, "Classe"] = np.nan
     logger.info("NULL string replaced: %d records", null_string_fixed)
 
-    # 3a — NULL string literal in Valor → np.nan (missing sensor reading)
+    # 3a. NULL string literal in Valor → np.nan (missing sensor reading)
     mask_valor_null = df["Valor"].astype(str) == "NULL"
     valor_null_fixed = int(mask_valor_null.sum())
     df.loc[mask_valor_null, "Valor"] = np.nan
     logger.info("Valor NULL string replaced: %d records", valor_null_fixed)
 
-    # 3b — Comma decimal separator in Valor → float64
+    # 3b. Comma decimal separator in Valor → float64
     decimal_fixed = int(df["Valor"].astype(str).str.contains(",", na=False).sum())
     df["Valor"] = df["Valor"].astype(str).str.replace(",", ".", regex=False).astype(float)
     logger.info("Decimal separator fixed: %d records", decimal_fixed)
